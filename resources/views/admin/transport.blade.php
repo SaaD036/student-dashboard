@@ -10,18 +10,18 @@
     <style>
         .title{
             width: 100%;
-            height: 30%;
+            height: 10%;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px 0px 20px 0px;
+            padding: 5px 0px 5px 0px;
         }
         .title h1{
             font-family: cursive;
             color: #05a124;
         }
         .course-form-container{
-            height: 60%;
+            height: 40%;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -52,7 +52,7 @@
             </div>
 
             <div class="course-form-container">
-                <form action="{{ route('admin-save-course') }}", method="post" style="width:70%">
+                <form action="{{ route('admin-transport-save') }}", method="post" style="width:70%">
                 {{ csrf_field() }}
 
                     <div class="profile_info_div">
@@ -107,6 +107,10 @@
                         <button type="submit" class="btn btn-primary" style="margin-top: 10px; float:right; background-color:green">Update</button>
                     </div>
                 </form>
+            </div>
+
+            <div style="height: 40%;">
+                @include('User.transport_table')
             </div>
         </div>
     </div>

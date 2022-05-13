@@ -33,6 +33,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/faculty', [App\Http\Controllers\AdminController::class, 'showFaculty'])->name('admin-faculty');
     Route::get('/people/{id}', [App\Http\Controllers\AdminController::class, 'showFacultyDetails']);
     Route::get('/transport', [App\Http\Controllers\AdminController::class, 'showTransport'])->name('admin-transport');
+    Route::post('/transport', [App\Http\Controllers\AdminController::class, 'saveTransport'])->name('admin-transport-save');
 });
 
 

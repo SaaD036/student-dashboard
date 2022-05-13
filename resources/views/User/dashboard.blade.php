@@ -28,13 +28,15 @@
             flex-direction: column;
         }
 
-        .course-container{
+        .container{
             width: 100%;
-            height: 80%;
+            height: 100%;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
+        }
+
+        .course-container{
+            width: 45%;
+            height: 80%;
             overflow-y: auto;
             padding: 0px 15px 0px 15px;
         }
@@ -43,7 +45,6 @@
             width: 100%;
             height: 60%;
             padding: 20px;
-            overflow-y: auto;
         }
         .table-head{
             background-color: #05a124;
@@ -74,27 +75,35 @@
                 </div>
                 <div class="pane-children" style="width: 30%;"></div>
             </div>
-            <div class="course-container">
-                <table class="table table-striped">
-                    <thead>
-                        <tr class="table-head">
-                            <td class="table-cell" style="width: 50%">Name</td>
-                            <td class="table-cell" style="width: 30%">Semestar</td>
-                            <td class="table-cell" style="width: 20%">Grade</td>
-                        </tr>
-                    </thead>
 
-                    <tbody>
-                        @foreach($courses as $course)
-                            <tr>
-                                <td class="table-cell">{{ $course->name }}</td>
-                                <td class="table-cell">{{ $course->semestar }}</td>
-                                <td class="table-cell">{{ $course->grade }}</td>
+            <div class="container">
+                <div class="course-container" style="padding-top:20px;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr class="table-head">
+                                <td class="table-cell" style="width: 50%">Name</td>
+                                <td class="table-cell" style="width: 30%">Semestar</td>
+                                <td class="table-cell" style="width: 20%">Grade</td>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+
+                        <tbody>
+                            @foreach($courses as $course)
+                                <tr>
+                                    <td class="table-cell">{{ $course->name }}</td>
+                                    <td class="table-cell">{{ $course->semestar }}</td>
+                                    <td class="table-cell">{{ $course->grade }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="course-container">
+                    @include('User.transport_table')
+                </div>
             </div>
+            
         </div>
     </div>
 </body>

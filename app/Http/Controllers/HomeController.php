@@ -9,6 +9,7 @@ use DB;
 use App\Models\Course;
 use App\Models\StudentTakeCourse;
 use App\Models\Department;
+use App\Models\Transport;
 
 class HomeController extends Controller
 {
@@ -49,10 +50,12 @@ class HomeController extends Controller
                     ->orderBy('semestar')
                     ->get();
 
+        $transports = Transport::get();
+
         // return $takenCourses;
         // return $totalCourse;
         // return $cgpa;
-        return view('User.dashboard', compact('courses', 'totalCourse', 'cgpa'));
+        return view('User.dashboard', compact('courses', 'totalCourse', 'cgpa', 'transports'));
     }
 
     public function course(){

@@ -8,6 +8,7 @@ use App\Models\Department;
 use App\Models\Course;
 use App\Models\User;
 use App\Models\Counseling;
+use App\Models\Transport;
 use DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -264,8 +265,29 @@ class AdminController extends Controller
             return redirect()->route('home');
         }
 
-        
+        $transports = Transport::get();        
 
-        return view('admin.transport');
+        return view('admin.transport', compact('transports'));
+    }
+
+    public function saveTransport(Request $request){
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
+
+        if(!Auth::user()->is_authority){
+            return redirect()->route('home');
+        }
+
+        $transport = new Transport;
+
+        $transport->to = $request->to;
+        $transport->from = $request->from;
+        $transport->time = $request->time;
+        $transport->stopage = $request->stopage;
+
+        $transport->save();
+
+        return redirect()->route('admin-transport');
     }
 }
