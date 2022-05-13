@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 use App\Models\Department;
+use App\Models\Counseling;
 
 class UserController extends Controller
 {
@@ -55,6 +56,27 @@ class UserController extends Controller
             return redirect('/user/'.$id);
         }
 
+        if(Auth::check() && Auth::user()->is_authority){
+            $user = User::where('id', $id)->first();
+
+            if($request->email){
+                $user->email = $request->email;
+            }
+            if($request->f_name){
+                $user->first_name = $request->f_name;
+            }
+            if($request->l_name){
+                $user->last_name = $request->l_name;
+            }
+            if($request->phone){
+                $user->phone = $request->phone;
+            }
+
+            $user->save();
+            session()->flash('success', 'User updated successfully');
+            return redirect()->route('admin-faculty');
+        }
+
         else{
             session()->flash('errors', 'You are not logged in');
             return redirect()->route('home');
@@ -73,5 +95,49 @@ class UserController extends Controller
         $user->save();
 
         return redirect('home');
+    }
+
+    public function showFaculty(){
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
+
+        $users = User::where('is_authority', 1)
+                ->where('department', Auth::user()->department)
+                ->get();
+
+        return view('admin.faculty', compact('users'));
+    }
+
+    public function showFacultyDetails($id){
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
+
+        $user = User::where('id', $id)->first();
+        $user_department = Department::select()
+                                    ->where('id', $user->department)
+                                    ->first();
+        $districts = Department::select()->get();
+        $counselings = Counseling::where('teacher_id', $id)->get();
+
+        return view('admin.faculty_profile', compact('user', 'user_department', 'districts', 'counselings'));
+    }
+
+    public function takeCounselling($id){
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
+
+        if(Auth::user()->is_authority){
+            return redirect()->route('admin-home');
+        }
+
+        $counseling = Counseling::where('id', $id)->first();
+
+        $counseling->student_id = Auth::user()->id;
+        $counseling->save();
+
+        return redirect()->route('user-faculty');
     }
 }

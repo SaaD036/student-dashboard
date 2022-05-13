@@ -1,6 +1,7 @@
 <style>
     .container{
         padding: 5px 15px 5px 15px;
+        height: 10%;
     }
     .nav-component{
         text-align: center;
@@ -15,19 +16,19 @@
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav" style="width:100%">
             <li class="nav-item nav-component active">
-                <a class="nav-link" href="#">Add people</span></a>
+                <a class="nav-link" href="{{ route('admin-create-user') }}">Add people</span></a>
             </li>
             <li class="nav-item nav-component active">
-                <a class="nav-link" href="#">Result</span></a>
+                <a class="nav-link" href="{{ route('admin-people') }}">People</span></a>
             </li>
             <li class="nav-item nav-component active">
-                <a class="nav-link" href="#">Add people</span></a>
+                <a class="nav-link" href="{{ route('admin-course') }}">Course</span></a>
             </li>
             <li class="nav-item nav-component active">
-                <a class="nav-link" href="#">Add people</span></a>
+                <a class="nav-link" href="{{ route('admin-result') }}">Result</span></a>
             </li>
             <li class="nav-item nav-component active">
-                <a class="nav-link" href="#">Add people</span></a>
+                <a class="nav-link" href="{{ route('admin-transport') }}">Transport</span></a>
             </li>
         </ul>
     </div>

@@ -72,24 +72,24 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(Request $request)
-    {
-        User::create([
-            'first_name' => $request->f_name,
-            'last_name' => $request->l_name,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'image' => 'https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425_960_720.png',
-            'password' => Hash::make($request->password),
-            'department' => $request->district_id,
-            'ip_address' => request()->ip()
-        ]);
+    // protected function create(Request $request)
+    // {
+    //     User::create([
+    //         'first_name' => $request->f_name,
+    //         'last_name' => $request->l_name,
+    //         'phone' => $request->phone,
+    //         'email' => $request->email,
+    //         'image' => 'https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425_960_720.png',
+    //         'password' => Hash::make($request->password),
+    //         'department' => $request->district_id,
+    //         'ip_address' => request()->ip()
+    //     ]);
 
-        // $user->notify(new VerifyRegistration($user, $user->remember_token));
-        // session()->flash('success', 'Confirmation mail has been sent to you');
+    //     // $user->notify(new VerifyRegistration($user, $user->remember_token));
+    //     // session()->flash('success', 'Confirmation mail has been sent to you');
 
-        return redirect('/');
-    }
+    //     return redirect('/');
+    // }
 
     public function showRegistrationForm()
     {
